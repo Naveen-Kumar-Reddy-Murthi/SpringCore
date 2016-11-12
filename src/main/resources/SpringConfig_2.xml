@@ -28,5 +28,11 @@
 		<property name="id" value="1"/>
 	</bean>
 	<bean id="listener" class="org.mnr.listeners.ContainerListener"/>
-	<bean id="aware" class="org.mnr.spring.InterfaceImpl"
+	<bean id="aware" class="org.mnr.spring.InterfaceImpl"/>
+	<bean id="beanPostProcessor" class="org.mnr.spring.BeanPostProcessorImpl"/>
+	<bean id="myFactoryBean" class="org.mnr.spring.MyFactoryBean"/>
+	<bean id="factoryBeanDependent" class="org.mnr.spring.FactoryBeanDependent">
+		<property name="name" ref="myFactoryBean"/>
+	</bean>
+	
 </beans>

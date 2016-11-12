@@ -34,9 +34,9 @@ public class InterfaceImpl implements ApplicationContextAware, BeanFactoryAware,
 		
 	}
 	public void printAllInfo(){
-		System.out.println(beanName);
-		System.out.println(context.isPrototype("address"));
-		System.out.println(context.isSingleton("employee"));
+		System.out.println("beanName:"+beanName);
+		System.out.println("isPrototype:"+context.isPrototype("address"));
+		System.out.println("isSingleton:"+context.isSingleton("employee"));
 		String ids[] = context.getBeanDefinitionNames();
 		System.out.println(Arrays.toString(ids));
 		
