@@ -28,4 +28,5 @@
 		<property name="id" value="1"/>
 	</bean>
 	<bean id="listener" class="org.mnr.listeners.ContainerListener"/>
+	<bean id="aware" class="org.mnr.spring.InterfaceImpl"
 </beans>

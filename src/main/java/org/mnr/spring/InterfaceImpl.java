@@ -1,5 +1,7 @@
 package org.mnr.spring;
 
+import java.util.Arrays;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -32,7 +34,11 @@ public class InterfaceImpl implements ApplicationContextAware, BeanFactoryAware,
 		
 	}
 	public void printAllInfo(){
-		
+		System.out.println(beanName);
+		System.out.println(context.isPrototype("address"));
+		System.out.println(context.isSingleton("employee"));
+		String ids[] = context.getBeanDefinitionNames();
+		System.out.println(Arrays.toString(ids));
 		
 	}
 }
