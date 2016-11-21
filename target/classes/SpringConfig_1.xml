@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"   
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <!-- <import resource="SpringConfig_2.xml"/> Any number of config/xml files can be imported
+    Alternative to this is to pass the second xml to constructor of  ClassPathXmlApplicationContext constructor
+    We can pass any number of config/xml files to seperated by comma
+    -->
+	<!--   S1	-->
+    
+    	<!-- <bean id="emp1" class="org.mnr.spring.Employee" scope="singleton">
+    	<constructor-arg name="id" value="2" />	if we use constructor, we should've matching constructor in the bean otherwise RE 
+    	<constructor-arg name="name" value="b2" />
+    	
+    	<constructor-arg index="1" value="b2" />   if we don't want to follow the sequence of params, need to specify the index starting from zero
+    	<constructor-arg index="0" value="1" />
+    	
+    	<constructor-arg  value="1" />				We can supply direct values without index,name tags. But they should be in the order of constructor params defined in the bean
+    	<constructor-arg  value="MNReddy" />
+    	
+    	
+    	<constructor-arg  value="MNReddy" type="java.lang.String" /> We can supply type of parameters, In this case order need not to be matched. It is useful incase of multiple constructors with different type parameters
+    	<constructor-arg  value="123" type="int" />
+    	
+    	
+    	<property name="id" value="1"/>			If we use property tags, there should be setters in the bean. Otherwise RE. property tags will override constructor param values
+    	<property name="name" value="Naveen Reddy"/> 
+	    </bean>
+	    <bean id="emp2" class="org.mnr.spring.Employee" scope="prototype">
+	     <property name="id" value="2"/>
+	     <property name="name" value="Prototype"/> 
+	    </bean> -->
+    
+     <!--  S2   -->
+    	<!-- <bean id="address" class="org.mnr.spring.Address">
+    	<property name="id" value="1"/>
+    	<property name="streetName" value="First"/>
+    	<property name="country" value="First"/>
+    	</bean> 	                       
+    	
+    	<bean id="employee" class="org.mnr.spring.Employee">
+    	<property name="id" value="1"/>
+    	<property name="name" value="Naveen"/>
+    	<property name="address" ref="address"/>  ref bean can be declared anywhere in the xml file, a ref tag can point to id,name or aliases 
+    	<property name="address">
+	    	<bean class="org.mnr.spring.Address"> This is an inner bean, it doesn't require id  
+	    	<property name="id" value="11"/>
+	    	<property name="streetName" value="street"/>
+	    	<property name="country" value="India"/>
+	    	</bean>
+    	</property>
+    	
+    	</bean> -->
+    	
+     <!--  S3   -->
+     	<!-- <bean id="emp" class="org.mnr.spring.Employee">
+     	<property name="phoneNumbers">
+     	<set>
+	     	<value>9700988987</value>
+	     	<value>9700988987</value>
+	     	<value>9700988987</value>
+	     	<value>8588896587</value>
+	     	<value>8588896587</value>
+	     	<value>8588896587</value>
+	     	<value>9990144007</value>
+	     	<value>9990144007</value>
+	     	<value>9990144007</value>
+     	</set>
+     	</property>
+     	</bean> -->
+     	
+     <!--  S4 -->
+        <!-- <bean id="address" class="org.mnr.spring.Address">
+    	<property name="id" value="1"/>
+    	<property name="streetName" value="GoutamBuddha Nagar"/>
+    	<property name="country" value="India"/>
+    	</bean> 
+    	
+    	<bean id="address1" class="org.mnr.spring.Address">
+    	<property name="id" value="2"/>
+    	<property name="streetName" value="Prashanth Nagar"/>
+    	<property name="country" value="India"/>
+    	</bean>	                       
+    	
+    	<bean id="employee" class="org.mnr.spring.Employee">
+    	<constructor-arg value="1"/>
+    	<constructor-arg value="Naveen"/>
+    	<constructor-arg >
+    	<ref bean="address"/>
+    	</constructor-arg>	
+    	</bean>  -->
+     
+    <!-- S5  tbd-->
+	    	<!-- <bean id="employee" class="org.mnr.spring.Employee" name="employee">name tag in bean tag used to create alias, name tag values can be duplicate in an spring xml file
+		    	<property name="id" value="1"/>
+		    	<property name="name" value="Naveen"/>
+		    	<property name="address">
+		    	<idref  bean="address"/>
+		    	</property>
+	    	</bean>
+	    	
+	    	<alias name="employee" alias="employee.alias"/>only name will be different but object is same.
+	    	
+	    	<bean id="address" class="org.mnr.spring.Address" name="adr">
+	    	<property name="id" value="1"/>
+	    	<property name="streetName" value="GoutamBuddha Nagar"/>
+	    	<property name="country" value="India"/>
+	    	</bean> -->
+    	
+    <!--S6  -->
+      <!--byName:-->
+			    <!-- autowire takes three types of values default, byName, byType and constructor  -->	
+			    <!-- For autowiring byName, bean id/name of dependent bean in the xml should be same of property name in the depending bean
+				     In our case, Employee is having and Address bean with reference address which is being autowired. Xml is also having 
+				     a bean configured with id as address-->
+				<!-- It's always recommanded to use id tag over name. Because id is validated by container and can't be duplicate where as
+				     name tag isn't validated and can be duplicate -->
+	    		<!-- There can be duplicate dependent objects but container injects the bean with id/name same as property name of dependable
+	    		     object. If there is no bean with matching id, container assigns null to dependable object, no exception is thrown -->
+	    		<!-- If there are two dependent beans with same id in the xml file then compiler throws exception -->
+	    		     
+	    		     
+			    	
+			    		<!-- <bean id="employee" class="org.mnr.spring.Employee" autowire="byName"> 
+					    	<property name="id" value="1"/>
+					    	<property name="name" value="Naveen"/>
+				    	</bean>
+				    	
+				    	<bean id="address" class="org.mnr.spring.Address">
+				    	<property name="id" value="1"/>
+				    	<property name="streetName" value="Siddipet, Medak, Telangana"/>
+				    	<property name="country" value="India"/>
+				    	</bean>
+				    	
+				    	<bean id="address11" class="org.mnr.spring.Address">
+				    	<property name="id" value="2"/>
+				    	<property name="streetName" value="Hyderabad, Telangana"/>
+				    	<property name="country" value="India"/>
+				    	</bean>
+				    	
+				    	<bean id="address123456" class="org.mnr.spring.Address">
+				    	<property name="id" value="3"/>
+				    	<property name="streetName" value="GoutamBuddha Nagar"/>
+				    	<property name="country" value="India"/>
+				    	</bean>  -->
+				    	
+				  
+		    	
+	    	
+	  <!--byType  -->
+	  		<!--byType doesn't require dependent bean having same id as the property name of dependable object. Id and property name can be different  -->
+	  		<!--byType autowiring doesn't allow duplicate dependent objects in the xml file, If there are any container throws exception -->
+	  		<!--here bean id is optional as container will look for dependency based on type -->
+	  		 <!-- <bean id="employee" class="org.mnr.spring.Employee" autowire="byType"> 
+		    	<property name="id" value="1"/>
+		    	<property name="name" value="Naveen"/>
+	    	</bean>
+	    	
+	    	<bean  class="org.mnr.spring.Address">
+		    	<property name="id" value="123"/>
+		    	<property name="streetName" value="Noida, GoutamBuddha Nagar"/>
+		    	<property name="country" value="India"/>
+	    	</bean> 
+	    	
+	    	<bean id="address11" class="org.mnr.spring.Address">
+		    	<property name="id" value="2"/>
+		    	<property name="streetName" value="Hyderabad, Telangana"/>
+		    	<property name="country" value="India"/>
+	    	</bean> -->
+	  
+	  <!-- by using constructor -->
+	  	   <!--Autowiring by constructor works first based on byName, then byType 
+	  	       And if both of them not successful in finding the dependent object, container throws and exception  -->
+	  	   <!--If there are overloaded constructors in a bean and its dependecies are defined in the bean then the
+	  	   		constructor which is first in the over in the bean is executed -->
+	  	   <!-- If any parameter(bean definition)of a constructor is missed in the config file and no other alternative
+	  	        constructor is defined with defined params, then container throws exception>-->
+	  		
+	  		<!-- <bean id="employee" class="org.mnr.spring.Employee" autowire="constructor">
+		  		<constructor-arg name="id" value="13123"/>
+		  		<constructor-arg name="name" value="Naveen Reddy"/>
+	  		</bean>
+	  		
+	  		<bean class="org.mnr.spring.Address">
+	  			<property name="id" value="123456"/>
+		    	<property name="streetName" value="Siddipet, Medak, Telangana"/>
+		    	<property name="country" value="India"/>
+	  		</bean>
+	  		
+	  		<bean class="org.mnr.spring.Vehicle">
+	  			<property name="id" value="13123"/>
+		  		<property name="name" value="Naveen Reddy"/>
+	  		</bean>
+	  		
+	  		<bean class="org.mnr.spring.Department">
+	  			<property name="id" value="13123"/>
+		  		<property name="name" value="Naveen Reddy"/>
+	  		</bean> -->
+	  		
+	<!--S7  -->	
+	<context:annotation-config/> <!-- This entry is mandatory for annotation based auto wiring -->
+	
+			<bean id="developer" class="org.mnr.spring.Developer">
+				<property name="id" value="1"/>
+				<property name="name" value="Naveen"/>
+			</bean>		
+			
+			<!-- <bean id="language" class="org.mnr.spring.Language">
+				<property name="id" value="1"/>
+				<property name="name" value="Java"/>
+			</bean>	 -->
+	   	
+    
+</beans>  
